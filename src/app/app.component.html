@@ -1,5 +1,5 @@
 <div class="container">
   <h1>Open GitHub Issues</h1>
   <app-search-input (inputChange)="onInputChange($event)"></app-search-input>
-  <app-search-results></app-search-results>
+  <app-search-results [input]="input"></app-search-results>
 </div>

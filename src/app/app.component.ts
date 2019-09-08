@@ -7,8 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'open-github-issues';
+  input = '';
 
   onInputChange(value) {
     console.log(`on input change: ${value}`);
+    this.input = value;
   }
 }
