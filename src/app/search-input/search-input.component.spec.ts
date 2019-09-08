@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 
 import { SearchInputComponent } from './search-input.component';
+import { EventEmitter } from '@angular/core';
 
 describe('SearchInputComponent', () => {
   let component: SearchInputComponent;
@@ -9,10 +9,7 @@ describe('SearchInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchInputComponent ],
-      imports: [
-        FormsModule
-      ]
+      declarations: [ SearchInputComponent ]
     })
     .compileComponents();
   }));
@@ -25,5 +22,9 @@ describe('SearchInputComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have inputChange output', () => {
+    expect(component.inputChange).toEqual(jasmine.any(EventEmitter));
   });
 });

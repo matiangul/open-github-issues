@@ -1,11 +1,10 @@
 <div class="form-group">
   <label for="searchInput">Search for issues by their title</label>
   <input
+    #searchInput
+    (keyup)="inputChange.emit(searchInput.value)"
     type="text"
     class="form-control"
-    id="searchInput"
-    name="searchInput"
     placeholder="Type title of an issue you are looking for"
-    [(ngModel)]="input"
   />
 </div>
