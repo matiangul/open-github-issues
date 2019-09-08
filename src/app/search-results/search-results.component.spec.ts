@@ -22,4 +22,20 @@ describe('SearchResultsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have property saying whether input is empty', () => {
+    expect(component.isInputEmpty).toBe(true);
+  });
+
+  it('should display empty info when input is empty', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('[data-test="empty-info"]')).not.toBeNull();
+  });
+
+  it('should not display empty info when input is not empty', () => {
+    component.input = 'test';
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('[data-test="empty-info"]')).toBeNull();
+  });
 });

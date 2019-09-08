@@ -10,7 +10,6 @@ export class AppComponent {
   input = '';
 
   onInputChange(value) {
-    console.log(`on input change: ${value}`);
     this.input = value;
   }
 }

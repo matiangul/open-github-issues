@@ -7,7 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class SearchResultsComponent {
 
-  @Input() input;
+  @Input() input = '';
+
+  get isInputEmpty(): boolean {
+    return this.input.replace(/\s/, '').length === 0;
+  }
 
   constructor() { }
 
