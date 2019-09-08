@@ -1,12 +1,20 @@
 import { TestBed, async } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { SearchInputComponent } from './search-input/search-input.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        SearchInputComponent,
+        SearchResultsComponent
       ],
+      imports: [
+        FormsModule
+      ]
     }).compileComponents();
   }));
 
