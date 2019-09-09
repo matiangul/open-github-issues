@@ -5,18 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchInputComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    SearchResultComponent,
   ],
-  imports: [
-    BrowserModule,
-    FormsModule
-  ],
+  imports: [BrowserModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

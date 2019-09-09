@@ -7,6 +7,6 @@
 <p *ngIf="issues.length === 0 && !isInputTooShort && !isLoading">
   try a different query
 </p>
-<ul *ngIf="issues.length > 0 && !isInputTooShort && !isLoading">
-  <li *ngFor="let issue of issues">{{ issue }}</li>
-</ul>
+<div class="list-group" *ngIf="issues.length > 0 && !isInputTooShort && !isLoading">
+  <app-search-result *ngFor="let issue of issues" [issue]="issue"></app-search-result>
+</div>
