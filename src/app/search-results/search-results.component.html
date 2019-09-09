@@ -1,1 +1,4 @@
 <p data-test="empty-info" *ngIf="isInputEmpty">your search results will appear here</p>
+<ul *ngIf="!isInputEmpty">
+    <li *ngFor="let issue of issues">{{issue}}</li>
+</ul>

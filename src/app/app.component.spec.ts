@@ -2,6 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SearchInputComponent } from './search-input/search-input.component';
+import { GithubService } from './github.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -9,8 +10,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         SearchInputComponent,
-        SearchResultsComponent
-      ]
+        SearchResultsComponent,
+      ],
+      providers: [GithubService],
     }).compileComponents();
   }));
 
@@ -30,6 +32,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.container h1').textContent).toContain('Open GitHub Issues');
+    expect(compiled.querySelector('.container h1').textContent).toContain(
+      'Open GitHub Issues'
+    );
   });
 });
