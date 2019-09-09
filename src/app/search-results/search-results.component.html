@@ -1,4 +1,12 @@
-<p data-test="empty-info" *ngIf="isInputEmpty">your search results will appear here</p>
-<ul *ngIf="!isInputEmpty">
-    <li *ngFor="let issue of issues">{{issue}}</li>
+<p data-test="empty-info" *ngIf="isInputTooShort">
+  your search results will appear here
+</p>
+<div class="spinner-border" role="status" *ngIf="isLoading">
+  <span class="sr-only">Loading...</span>
+</div>
+<p *ngIf="issues.length === 0 && !isInputTooShort && !isLoading">
+  try a different query
+</p>
+<ul *ngIf="issues.length > 0 && !isInputTooShort && !isLoading">
+  <li *ngFor="let issue of issues">{{ issue }}</li>
 </ul>

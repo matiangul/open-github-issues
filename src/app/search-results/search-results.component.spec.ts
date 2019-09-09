@@ -24,8 +24,8 @@ describe('SearchResultsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have property saying whether input is empty', () => {
-    expect(component.isInputEmpty).toBe(true);
+  it('should have property saying whether input is too empty', () => {
+    expect(component.isInputTooShort).toBe(true);
   });
 
   it('should display empty info when input is empty', () => {
