@@ -17,7 +17,7 @@ export class SearchResultsComponent implements OnChanges, OnInit {
   isLoading = false;
 
   get isInputTooShort(): boolean {
-    return GithubService.isTooShort(this.input);
+    return this.github.isTooShort(this.input);
   }
 
   constructor(private readonly github: GithubService) {}

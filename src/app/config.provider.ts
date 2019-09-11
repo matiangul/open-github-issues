@@ -1,16 +1,19 @@
 import { InjectionToken } from '@angular/core';
 
 export interface Config {
-  a: number;
+  MIN_TEXT_LENGHT: number;
+  DEBOUNCE_TIME_MS: number;
+  GITHUB_SEARCH_URL_FUN: (query: string) => string;
 }
 
 export const config: Config = {
-  a: 1,
+  MIN_TEXT_LENGHT: 2,
+  DEBOUNCE_TIME_MS: 1000,
+  GITHUB_SEARCH_URL_FUN: (query: string) =>
+    `https://api.github.com/search/issues?q=${query}+in:title,body,comments+state:open+type:issue+order:desc`,
 };
 
-export const CONFIG = new InjectionToken<Config>(
-  'Application Config'
-);
+export const CONFIG = new InjectionToken<Config>('Application Config');
 
 export const CONFIG_PROVIDER = {
   provide: CONFIG,
