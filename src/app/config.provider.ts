@@ -19,3 +19,8 @@ export const CONFIG_PROVIDER = {
   provide: CONFIG,
   useValue: config,
 };
+
+export const TEST_CONFIG_PROVIDER = (testConfig: Config) => ({
+  provide: CONFIG,
+  useValue: testConfig,
+});

@@ -2,13 +2,12 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { of, Subject } from 'rxjs';
 import { CONFIG_PROVIDER, TEST_CONFIG_PROVIDER } from './config.provider';
 import { GithubService } from './github.service';
-import { fail, ok } from 'assert';
 
-describe('GithubService', () => {
+describe('GithubService timing tests', () => {
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -17,7 +16,7 @@ describe('GithubService', () => {
         GithubService,
         TEST_CONFIG_PROVIDER({
           ...CONFIG_PROVIDER.useValue,
-          DEBOUNCE_TIME_MS: 0,
+          DEBOUNCE_TIME_MS: 200,
         }),
       ],
       imports: [HttpClientTestingModule],
@@ -30,36 +29,28 @@ describe('GithubService', () => {
     httpTestingController.verify();
   });
 
-  it('should be created', () => {
-    const service: GithubService = TestBed.get(GithubService);
-    expect(service).toBeTruthy();
-  });
-
-  it('should not load when noone asked', () => {
-    const service: GithubService = TestBed.get(GithubService);
-    expect(service.isLoading.value).toBe(false);
-  });
-
-  it('should know what texts are to short for searching', () => {
-    const service: GithubService = TestBed.get(GithubService);
-    expect(service.isTooShort('ab')).toBe(false);
-    expect(service.isTooShort('a')).toBe(true);
-  });
-
-  it('should search for open github issues for query "test"', () => {
+  it('should search for open github issues ony for query "ttt"', fakeAsync(() => {
     const stubbedIssuesResponse = { items: [] };
     const service: GithubService = TestBed.get(GithubService);
+    const searchValObservable = new Subject<string>();
 
     service
-      .getOpenIssuesByTitle(of('test'))
+      .getOpenIssuesByTitle(searchValObservable)
       .subscribe(issues => expect(issues).toEqual(stubbedIssuesResponse.items));
+
+    searchValObservable.next('t');
+    tick(100);
+    searchValObservable.next('tt');
+    tick(100);
+    searchValObservable.next('ttt t');
+    tick(200);
 
     const req = httpTestingController.expectOne(
       request =>
         request.url ===
-        'https://api.github.com/search/issues?q=test+in:title,body,comments+state:open+type:issue+order:desc'
+        'https://api.github.com/search/issues?q=ttt+t+in:title,body,comments+state:open+type:issue+order:desc'
     );
     expect(req.request.method).toEqual('GET');
     req.flush(stubbedIssuesResponse);
-  });
+  }));
 });
