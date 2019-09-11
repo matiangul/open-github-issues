@@ -10,7 +10,7 @@ export const config: Config = {
   MIN_TEXT_LENGHT: 2,
   DEBOUNCE_TIME_MS: 1000,
   GITHUB_SEARCH_URL_FUN: (query: string) =>
-    `https://api.github.com/search/issues?q=${query}+in:title,body,comments+state:open+type:issue+order:desc`,
+    `https://api.github.com/search/issues?q=${query}+in:title,body,comments+state:open+order:desc`,
 };
 
 export const CONFIG = new InjectionToken<Config>('Application Config');

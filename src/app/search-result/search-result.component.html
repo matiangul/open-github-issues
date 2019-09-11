@@ -1,21 +1,21 @@
-<div class="list-group-item list-group-item-action">
-  <div class="d-flex w-100 justify-content-between">
-    <h5 class="mb-1">
-      <a href="{{ issue.html_url }}">{{ issue.title }}</a>
-    </h5>
-    <a href="{{ issue.user.html_url }}">
-      <figure class="figure">
-        <img src="{{ issue.user.avatar_url }}" class="ifigure-img img-fluid rounded" alt="{{ issue.user.login }} avatar"/>
-        <figcaption class="figure-caption text-right">{{ issue.user.login }}</figcaption>
-      </figure>
-    </a>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><a target="_blank" href="{{ issue.html_url }}">{{ issue.title }}</a></h5>
+    <p class="card-text">{{ issue.body | slice:0:100 }}...</p>
   </div>
-  <p class="mb-1">{{ issue.body }}</p>
-  <div class="d-flex w-100 justify-content-between">
-    <small>Labels: <span *ngFor="let label of issue.labels; last as isLast">
-      {{ label.name }}<span *ngIf="!isLast">, </span>
-    </span></small>
-    <small>Createt at: {{ issue.created_at }}</small>
-    <img [src]="isStarred ? '/assets/starred.svg' : '/assets/unstarred.svg'" (click)="toggleIssueStar()"/>
+  <div class="card-footer d-flex justify-content-between">
+      <div class="w-50 mt-2"><small class="text-muted"><a target="_blank" href="{{ issue.user.html_url }}">Author: {{ issue.user.login }}</a></small></div>
+      <div class="text-right w-50"><a target="_blank" href="{{ issue.user.html_url }}">
+        <img class="w-25" src="{{ issue.user.avatar_url }}" alt="{{ issue.user.login }} avatar">
+      </a></div>
+  </div>
+  <div class="card-footer">
+      <small class="text-muted">Labels: <span *ngFor="let label of issue.labels; last as isLast">
+          {{ label.name }}<span *ngIf="!isLast">, </span>
+      </span></small>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">Createt at: {{ issue.created_at | date }}</small>
+    <img [src]="isStarred ? '/assets/starred.svg' : '/assets/unstarred.svg'" (click)="toggleIssueStar()" class="float-right" />
   </div>
 </div>

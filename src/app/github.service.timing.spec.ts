@@ -48,7 +48,7 @@ describe('GithubService timing tests', () => {
     const req = httpTestingController.expectOne(
       request =>
         request.url ===
-        'https://api.github.com/search/issues?q=ttt+t+in:title,body,comments+state:open+type:issue+order:desc'
+        'https://api.github.com/search/issues?q=ttt+t+in:title,body,comments+state:open+order:desc'
     );
     expect(req.request.method).toEqual('GET');
     req.flush(stubbedIssuesResponse);

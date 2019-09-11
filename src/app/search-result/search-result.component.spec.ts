@@ -14,7 +14,7 @@ const dummyGithubIssue: GithubIssue = {
   },
   labels: [{ name: 'label1' }],
   body: 'body',
-  created_at: 'created_at',
+  created_at: '2019-03-19T11:10:30Z',
 };
 
 describe('SearchResultComponent', () => {
