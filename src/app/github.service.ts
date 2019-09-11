@@ -1,6 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap, map, debounceTime, delay, filter } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+import { GithubIssue, GithubIssuesResponse } from './github.models';
 
 const MIN_TEXT_LENGHT = 2;
 const DEBOUNCE_TIME_MS = 1000;
@@ -13,16 +22,29 @@ export class GithubService {
     return text.trim().length < MIN_TEXT_LENGHT;
   }
 
-  getOpenIssuesByTitle(searchValue: Observable<string>): Observable<any[]> {
+  getOpenIssuesByTitle(
+    searchValue: Observable<string>
+  ): Observable<GithubIssue[]> {
     return searchValue.pipe(
       filter(val => !GithubService.isTooShort(val)),
-      tap(() => this.isLoading.next(true)),
-      delay(300),
       debounceTime(DEBOUNCE_TIME_MS),
+      distinctUntilChanged(),
+      tap(() => this.isLoading.next(true)),
+      map(val =>
+        val
+          .replace(/\s+/, ' ')
+          .split(' ')
+          .join('+')
+      ),
+      switchMap(searchQuery =>
+        this.http.get<GithubIssuesResponse>(
+          `https://api.github.com/search/issues?q=${searchQuery}+in:title,body,comments+state:open`
+        )
+      ),
       tap(() => this.isLoading.next(false)),
-      map(it => it.split(''))
+      map(res => res.items)
     );
   }
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 }

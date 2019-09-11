@@ -1,14 +1,21 @@
 <div class="list-group-item list-group-item-action">
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">
-      <a href="#">Title of a {{ issue }}</a>
+      <a href="{{ issue.url }}">{{ issue.title }}</a>
     </h5>
-    <a href="#">Author nick and avatar</a>
+    <a href="{{ issue.user.html_url }}">
+      <figure class="figure">
+        <img src="{{ issue.user.avatar_url }}" class="ifigure-img img-fluid rounded" alt="{{ issue.user.login }} avatar"/>
+        <figcaption class="figure-caption text-right">{{ issue.user.login }}</figcaption>
+      </figure>
+    </a>
   </div>
-  <p class="mb-1">Description of a {{ issue }}</p>
+  <p class="mb-1">{{ issue.body }}</p>
   <div class="d-flex w-100 justify-content-between">
-    <small>Labels: {{ issue }}</small>
-    <small>Creation date of {{ issue }}</small>
+    <small>Labels: <span *ngFor="let label of issue.labels; last as isLast">
+      {{ label.name }}<span *ngIf="!isLast">, </span>
+    </span></small>
+    <small>Createt at: {{ issue.created_at }}</small>
     <button type="button" class="btn btn-success">Star</button>
   </div>
 </div>

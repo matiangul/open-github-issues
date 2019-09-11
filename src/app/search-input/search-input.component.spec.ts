@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SearchInputComponent } from './search-input.component';
 import { EventEmitter } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SearchInputComponent } from './search-input.component';
 
 describe('SearchInputComponent', () => {
   let component: SearchInputComponent;
@@ -9,9 +8,8 @@ describe('SearchInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchInputComponent ]
-    })
-    .compileComponents();
+      declarations: [SearchInputComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -20,7 +18,7 @@ describe('SearchInputComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy();
   });
 

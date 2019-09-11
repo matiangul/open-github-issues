@@ -1,24 +1,16 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  OnInit,
-} from '@angular/core';
-import { GithubService } from '../github.service';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { filter } from 'minimatch';
+import { GithubService } from '../github.service';
 
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css'],
   providers: [GithubService],
 })
 export class SearchResultsComponent implements OnChanges, OnInit {
   @Input() input = '';
 
-  private githubInput = new BehaviorSubject<string>(this.input);
+  private observableInput = new BehaviorSubject<string>(this.input);
 
   issues = [];
 
@@ -32,14 +24,12 @@ export class SearchResultsComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     this.github
-      .getOpenIssuesByTitle(this.githubInput)
+      .getOpenIssuesByTitle(this.observableInput)
       .subscribe(issues => (this.issues = issues));
-    this.github
-      .isLoading
-      .subscribe(isLoading => this.isLoading = isLoading);
+    this.github.isLoading.subscribe(isLoading => (this.isLoading = isLoading));
   }
 
   ngOnChanges() {
-    this.githubInput.next(this.input);
+    this.observableInput.next(this.input);
   }
 }

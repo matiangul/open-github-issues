@@ -1,8 +1,10 @@
-import { TestBed, async } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { async, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { SearchResultsComponent } from './search-results/search-results.component';
-import { SearchInputComponent } from './search-input/search-input.component';
 import { GithubService } from './github.service';
+import { SearchInputComponent } from './search-input/search-input.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,8 +13,10 @@ describe('AppComponent', () => {
         AppComponent,
         SearchInputComponent,
         SearchResultsComponent,
+        SearchResultComponent,
       ],
       providers: [GithubService],
+      imports: [HttpClientModule],
     }).compileComponents();
   }));
 
@@ -20,12 +24,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'open-github-issues'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('open-github-issues');
   });
 
   it('should render title', () => {
