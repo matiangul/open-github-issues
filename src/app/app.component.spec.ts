@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { async, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { GithubService } from './github.service';
+import { CONFIG_PROVIDER } from './config.provider';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
@@ -15,7 +15,7 @@ describe('AppComponent', () => {
         SearchResultsComponent,
         SearchResultComponent,
       ],
-      providers: [GithubService],
+      providers: [CONFIG_PROVIDER],
       imports: [HttpClientModule],
     }).compileComponents();
   }));

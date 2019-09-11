@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GithubService } from '../github.service';
 import { SearchResultComponent } from '../search-result/search-result.component';
 import { SearchResultsComponent } from './search-results.component';
+import { CONFIG_PROVIDER } from '../config.provider';
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
@@ -11,7 +12,7 @@ describe('SearchResultsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SearchResultsComponent, SearchResultComponent],
-      providers: [GithubService],
+      providers: [GithubService, CONFIG_PROVIDER],
       imports: [HttpClientModule],
     }).compileComponents();
   }));

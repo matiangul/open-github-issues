@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   debounceTime,
@@ -9,6 +9,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+import { Config, CONFIG } from './config.provider';
 import { GithubIssue, GithubIssuesResponse } from './github.models';
 
 const MIN_TEXT_LENGHT = 2;
@@ -46,5 +47,8 @@ export class GithubService {
     );
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    @Inject(CONFIG) private readonly config: Config
+  ) {}
 }
