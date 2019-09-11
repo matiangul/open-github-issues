@@ -38,7 +38,7 @@ export class GithubService {
       ),
       switchMap(searchQuery =>
         this.http.get<GithubIssuesResponse>(
-          `https://api.github.com/search/issues?q=${searchQuery}+in:title,body,comments+state:open`
+          `https://api.github.com/search/issues?q=${searchQuery}+in:title,body,comments+state:open+type:issue+order:desc`
         )
       ),
       tap(() => this.isLoading.next(false)),

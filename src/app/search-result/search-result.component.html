@@ -1,7 +1,7 @@
 <div class="list-group-item list-group-item-action">
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">
-      <a href="{{ issue.url }}">{{ issue.title }}</a>
+      <a href="{{ issue.html_url }}">{{ issue.title }}</a>
     </h5>
     <a href="{{ issue.user.html_url }}">
       <figure class="figure">
@@ -16,6 +16,6 @@
       {{ label.name }}<span *ngIf="!isLast">, </span>
     </span></small>
     <small>Createt at: {{ issue.created_at }}</small>
-    <button type="button" class="btn btn-success">Star</button>
+    <img [src]="isStarred ? '/assets/starred.svg' : '/assets/unstarred.svg'" (click)="toggleIssueStar()"/>
   </div>
 </div>

@@ -1,10 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { GithubIssue } from '../github.models';
+import { LOCAL_STORAGE_PROVIDER } from '../storage.provider';
 import { SearchResultComponent } from './search-result.component';
+import { StarringService } from '../starring.service';
 
 const dummyGithubIssue: GithubIssue = {
   title: 'title',
-  url: 'url',
+  html_url: 'url',
   user: {
     login: 'login',
     avatar_url: 'avatar_url',
@@ -20,8 +22,10 @@ describe('SearchResultComponent', () => {
   let fixture: ComponentFixture<SearchResultComponent>;
 
   beforeEach(async(() => {
+    LOCAL_STORAGE_PROVIDER.useFactory().clear();
     TestBed.configureTestingModule({
       declarations: [SearchResultComponent],
+      providers: [StarringService, LOCAL_STORAGE_PROVIDER],
     }).compileComponents();
   }));
 
